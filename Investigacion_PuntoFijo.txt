@@ -1,0 +1,20 @@
+
+El método del punto fijo es un algoritmo utilizado para encontrar las raíces
+de una ecuación 𝑓(𝑥), con esto se hace referencia a aquellos puntos donde 
+f(x)=0,para esto se llevan a cabo distintos pasos el primero de estos es convertir
+f(x) en g(x), donde g(x) es una función auxiliar (el despeje de una de las x de f(x)).
+Luego de esto se selecciona una posicion inicial 𝑥0, teniendo en cuenta
+esta posicion inicial se comienzan a realizar iteraciones consecutivas donde las x
+que se encuentran en g(x) son remplazadas inicialmente con 𝑥0 para hallar 𝑥1
+y luego de ello con 𝑥1 para hallar 𝑥2.Los cuales se obtienen a partir de las 
+iteraciones,es importante resaltar que luego de realizar cada iteración se realiza 
+el calculo del error de tal manera que el proceso termina cuando el error es menor 
+al 1%, pues el numero hallado se considera la raiz de la función f(x).
+
+En cuanto a la programación del método numerico punto fijo,
+lo más relevante a tener en cuenta es:
+
+1. Obtener de parte del usuario la función g(x) y el punto de inicio 𝑥0
+2. Implementar de forma correcta la función g(x)
+3. Realizar una gestion adecuada para evitar generar bucles infinitos
+4. Realizar un correcto calculo del error en cada iteración
