@@ -25,3 +25,25 @@ while (error<tramo):
     xiMenos = xi
     xi = xnuevo
     tabla.append([iteracion,xi,tramo])
+
+# Parte de la salida
+print(tabulate(tabla, headers=['Iteración','Xi','Xi+1 - Xi']))
+print("========================================\nLa raíz exacta es: ", xnuevo,"\n========================================\n")
+# Parte grafica
+a = -2
+b = 5
+n = 50
+xn = np.linspace(a, b, n)
+yn = fdx(xn)
+plt.plot(xn, yn)
+plt.grid(True)
+plt.axhline(0, color="#ff0000")
+plt.axvline(0, color="#ff0000")
+plt.title("Metodo Secante")
+plt.ylabel("Eje Y")
+plt.xlabel("Eje X")
+plt.plot(xi,0, 'ro')
+
+if (xnuevo!= np.nan):
+    plt.axvline(xi)#Línea vertical donde cruzan la función idéntica y el g(x)
+plt.show()
