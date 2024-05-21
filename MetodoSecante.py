@@ -1,16 +1,25 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import sympy as sp
 from tabulate import tabulate
 
 
 print("==============================\nMÉTODO DE LA SECANTE\n==============================\n")
 
+
+def secante():
+
 #Funcion inicial
-def fdx(x):
-    fx= x**3+2*(x**2)+10*x-20
-    return fx
-xiMenos = 0
-xi = 1
+ #fdx(x):
+   ## fx= x**3+2*(x**2)+10*x-20
+   # return fx
+ x=x  
+x=sp.symbols('x')
+fdx=input('Digite f(x): ')
+fdx= sp.lambdify(x,fdx)
+xiMenos=float(input('Digite el primer punto de inicio(dato numerico): '))
+xi=float(input('Digite el segundo punto de inicio(dato numerico): '))
+
 xnuevo=0
 error = 0.0001
 
@@ -47,3 +56,5 @@ plt.plot(xi,0, 'ro')
 if (xnuevo!= np.nan):
     plt.axvline(xi)#Línea vertical donde cruzan la función idéntica y el g(x)
 plt.show()
+
+secante
