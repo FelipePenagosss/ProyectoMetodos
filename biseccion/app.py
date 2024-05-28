@@ -2,18 +2,18 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-def biseccion(f, a, b, tol=1e-6, max_iter=100):
-    if f(a) * f(b) >= 0:
-        raise ValueError("El teorema de Bolzano no se cumple: f(a) y f(b) deben tener signos opuestos.")
-    for _ in range(max_iter):
+def biseccion(f, a, b, error=1e-6):
+    maxima_Iteracion=100
+   
+    for _ in range(maxima_Iteracion):
         c = (a + b) / 2
-        if abs(f(c)) < tol or (b - a) / 2 < tol:
+        if abs(f(c)) < error or (b - a) / 2 < error:
             return c
         if f(c) * f(a) < 0:
             b = c
         else:
             a = c
-    raise ValueError("No convergió.")
+    raise ValueError("Error")
 
 @app.route('/biseccion', methods=['POST'])
 def solve_biseccion():

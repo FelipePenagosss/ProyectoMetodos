@@ -20,4 +20,7 @@ services:
     build: ./gauss_seidel
     ports:
       - "5005:5005"
-
+  jacobi:
+    build: ./jacobi
+    ports:
+      - "5004:5004"
