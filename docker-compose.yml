@@ -4,4 +4,8 @@ services:
     build: ./Newton_Raphson
     ports:
       - "5000:5000"
+  secante:
+    build: ./secante
+    ports:
+      - "5002:5002"
 
