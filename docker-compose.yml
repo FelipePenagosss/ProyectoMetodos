@@ -16,4 +16,7 @@ services:
     build: ./biseccion
     ports:
       - "5001:5001"
-
+  jacobi:
+    build: ./jacobi
+    ports:
+      - "5004:5004"
