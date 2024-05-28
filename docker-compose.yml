@@ -4,4 +4,7 @@ services:
     build: ./Newton_Raphson
     ports:
       - "5000:5000"
-
+  punto_fijo:
+    build: ./punto_fijo
+    ports:
+      - "5003:5003"
