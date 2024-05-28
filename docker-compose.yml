@@ -8,4 +8,12 @@ services:
     build: ./secante
     ports:
       - "5002:5002"
+  punto_fijo:
+    build: ./punto_fijo
+    ports:
+      - "5003:5003"
+  biseccion:
+    build: ./biseccion
+    ports:
+      - "5001:5001"
 
