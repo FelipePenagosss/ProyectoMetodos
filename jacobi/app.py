@@ -34,12 +34,12 @@ def jacobi_method(A, b, tol=1e-6, max_iter=100):
 @app.route('/jacobi', methods=['POST'])
 def solve_jacobi():
     data = request.json
-    A = np.array(data['A'])
-    b = np.array(data['b'])
+    A = np.array(data['Matriz'])
+    b = np.array(data['Vector_Resultado'])
 
     try:
         iterations, solution, final_error = jacobi_method(A, b)
-        return jsonify({'iterations': iterations, 'solution': solution, 'final_error': final_error})
+        return jsonify({'iteracion': iterations, 'solucion': solution, 'error_final': final_error})
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
 

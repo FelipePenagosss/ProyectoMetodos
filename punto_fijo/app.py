@@ -4,12 +4,19 @@ import math
 app = Flask(__name__)
 
 def punto_fijo(g, x0, tol=1e-6, max_iter=100):
+    iteraciones=[]
+    cont=0
     x = x0
     for _ in range(max_iter):
         x_next = g(x)
+        iteraciones.append({
+            'iteracion':cont,
+            'xi':x_next
+        })
         if abs(x_next - x) < tol:
-            return x_next
+            return x_next,iteraciones
         x = x_next
+        cont=cont+1
     raise ValueError("No convergió.")
 
 @app.route('/punto_fijo', methods=['POST'])
@@ -25,8 +32,8 @@ def solve_punto_fijo():
         return jsonify({'error': f'Error en la función: {str(e)}'}), 400
 
     try:
-        root = punto_fijo(g, x0)
-        return jsonify({'Raiz': root})
+        iteraciones,root = punto_fijo(g, x0)
+        return jsonify({'Iteraciones': root,'Raiz':iteraciones})
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
     except Exception as e:
