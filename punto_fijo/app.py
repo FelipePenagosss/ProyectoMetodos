@@ -26,7 +26,7 @@ def solve_punto_fijo():
 
     try:
         root = punto_fijo(g, x0)
-        return jsonify({'root': root})
+        return jsonify({'Raiz': root})
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
     except Exception as e:
