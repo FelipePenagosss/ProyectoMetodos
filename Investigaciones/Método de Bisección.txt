@@ -1,0 +1,26 @@
+Método de Bisección
+
+El método de bisección es un algoritmo numérico utilizado para encontrar la raíz de una función continua en un intervalo dado. Es un método iterativo que divide repetidamente el intervalo a la mitad y selecciona el subintervalo en el cual cambia de signo la función, asegurando que la raíz se encuentre dentro de dicho subintervalo. Este proceso se repite hasta que el intervalo sea lo suficientemente pequeño o hasta que se alcance una tolerancia predefinida para el error.
+
+Proceso:
+
+1. Inicialización:
+   - Se elige un intervalo inicial [a, b] donde se sospecha que se encuentra la raíz de la función.
+   - Se calcula el punto medio c del intervalo inicial: c = (a + b) / 2.
+
+2. Evaluación de la función:
+   - Se evalúa la función f(x) en los extremos del intervalo y en el punto medio para determinar en qué subintervalo hay un cambio de signo.
+   - Si f(a) y f(c) tienen signos opuestos, entonces la raíz está en el subintervalo [a, c]. De lo contrario, la raíz está en el subintervalo [c, b].
+
+3. Actualización del intervalo:
+   - Se actualiza el intervalo reemplazando uno de sus extremos por el punto medio:
+     - Si f(a) y f(c) tienen signos opuestos, se reemplaza b por c, es decir, el nuevo intervalo es [a, c].
+     - Si f(c) y f(b) tienen signos opuestos, se reemplaza a por c, es decir, el nuevo intervalo es [c, b].
+   - Este paso reduce el tamaño del intervalo que contiene la raíz.
+
+4. Iteración:
+   - Se repiten los pasos 2 y 3 hasta que el intervalo sea lo suficientemente pequeño o hasta que se alcance una tolerancia predefinida para el error.
+
+5. Convergencia:
+   - El método converge hacia la raíz de la función a medida que se reduce el tamaño del intervalo en cada iteración.
+   - La raíz aproximada se encuentra en el punto medio del intervalo final.

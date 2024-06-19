@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   newton_raphson:
     build: ./Newton_Raphson
@@ -24,3 +24,7 @@ services:
     build: ./jacobi
     ports:
       - "5004:5004"
+  trapecio:
+    build: ./Trapecio
+    ports:
+      - "5006:5006"
