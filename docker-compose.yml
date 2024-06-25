@@ -28,3 +28,9 @@ services:
     build: ./Trapecio
     ports:
       - "5006:5006"
+  angular-app:
+    build:
+      context: ./proyectoF
+      dockerfile: Dockerfile
+    ports:
+      - "5009:5009"

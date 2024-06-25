@@ -1,7 +1,13 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import math
+import matplotlib.pyplot as plt
+import numpy as np
+import io
+import base64
 
 app = Flask(__name__)
+CORS(app)
 
 def punto_fijo(g, x0, tol=1e-6, max_iter=100):
     iteraciones=[]
@@ -11,7 +17,9 @@ def punto_fijo(g, x0, tol=1e-6, max_iter=100):
         x_next = g(x)
         iteraciones.append({
             'iteracion':cont,
-            'xi':x_next
+            'xi':x_next, 
+            'error':abs(x_next-x),
+
         })
         if abs(x_next - x) < tol:
             return x_next,iteraciones
@@ -23,17 +31,47 @@ def punto_fijo(g, x0, tol=1e-6, max_iter=100):
 def solve_punto_fijo():
     data = request.json
     g_str = data['funcion']
+    f_str=data['funcion_original']
     x0 = data['punto_inicial']
 
     # Definir la función g utilizando eval
     try:
         g = lambda x: eval(g_str, {"math": math, "x": x, "__builtins__": {}})
+        f =lambda x: eval(f_str, {"math": math, "x": x, "__builtins__": {}})
+        g_v = np.vectorize(g)
+        f_v = np.vectorize(f)
     except Exception as e:
         return jsonify({'error': f'Error en la función: {str(e)}'}), 400
 
     try:
-        iteraciones,root = punto_fijo(g, x0)
-        return jsonify({'Iteraciones': root,'Raiz':iteraciones})
+        root,iteraciones = punto_fijo(g,x0)
+         # Generar la gráfica
+        a = -5
+        b = 5
+        n = 100
+        xn = np.linspace(a, b, n)
+        yn = f_v(xn)
+
+        plt.plot(xn, yn)
+        plt.grid(True)
+        plt.axhline(0, color="#ff0000")
+        plt.axvline(0, color="#ff0000")
+        plt.plot(root, 0, 'ko')
+        plt.title("Metodo Punto fijo")
+        plt.ylabel("Eje Y")
+        plt.xlabel("Eje X")
+        if (root!= np.nan):
+            plt.axvline(root)#Línea vertical donde cruzan la función idéntica y el g(x)
+
+        img = io.BytesIO()
+        plt.savefig(img, format='png')
+        img.seek(0)
+        plt.close()
+
+        # Convertir la imagen a base64
+        img_base64 = base64.b64encode(img.getvalue()).decode('utf-8')
+
+        return jsonify({'Raiz': root,'Iteraciones':iteraciones,'Imagen':img_base64})
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
     except Exception as e:
