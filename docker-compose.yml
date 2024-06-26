@@ -28,6 +28,10 @@ services:
     build: ./Trapecio
     ports:
       - "5006:5006"
+  simpson:
+    build: ./simpson
+    ports:
+      - "5007:5007"
   angular-app:
     build:
       context: ./proyectoF
