@@ -1,1 +1,78 @@
-<p>simpson works!</p>
+<div class="row">
+    <div class="col-sm-5">
+      <div class="card">
+        <div class="card-body text-center">
+          <span class="titulo">{{titulo}}</span>
+          <form class="mt-3" [formGroup]="eventForm" (ngSubmit)="consulta()">
+            <div class="mb-3">
+              <input type="text" formControlName="funcion" class="form-control form-control-lg" placeholder="Funcion">
+              <div class="text-danger" *ngIf="eventForm.get('funcion')?.hasError('required') && eventForm.get('funcion')?.touched">
+                <span>La funcion <strong>es obligatoria</strong></span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <input type="number" formControlName="limitea" class="form-control form-control-lg" placeholder="Limite a ">
+              <div class="text-danger" *ngIf="eventForm.get('limitea')?.hasError('required') && eventForm.get('limitea')?.touched">
+                <span>El limite a de la funcion <strong>es obligatorio</strong></span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <input type="number" formControlName="limiteb" class="form-control form-control-lg" placeholder="Limite b">
+              <div class="text-danger" *ngIf="eventForm.get('limiteb')?.hasError('required') && eventForm.get('limiteb')?.touched">
+                <span>El limite b de la funcion <strong>es obligatorio</strong></span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <input type="number" formControlName="nimagenes" class="form-control form-control-lg" placeholder="Número de imágenes">
+              <div class="text-danger" *ngIf="eventForm.get('nimagenes')?.hasError('required') && eventForm.get('nimagenes')?.touched">
+                <span>El número de imágenes es obligatorio</span>
+              </div>
+              <div class="text-danger" *ngIf="eventForm.get('nimagenes')?.value % 2 !== 0 && !eventForm.get('nimagenes')?.hasError('required') && eventForm.get('nimagenes')?.touched">
+                <span>El número de imágenes debe ser par</span>
+              </div>
+            </div>
+            
+            
+            <div class="mb-3">
+              <button type="button" routerLink="/**" class="btn btn-secondary btn-lg float-start">VOLVER</button>
+              <button type="submit" [disabled]="eventForm.invalid" class="btn btn-success btn-lg float-end">ACEPTAR</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="card">
+        <div class="card-body text-center">
+          <span class="titulo">Resultados</span>
+          <br>
+          <span>Raiz Encontrada: {{raiz}}</span>
+          <br>
+          <span class="titulo">Gráfica</span>
+           <br>
+
+          <img *ngIf="imagen" [src]="imagen" alt="Gráfica">
+          <table *ngIf="lista.length >= 0" class="table table-striped mt-3">
+            <thead>
+              <tr>
+                <th scope="col">Punto evaluado</th>
+                <th scope="col">Imagen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let punto of lista">
+                <td>{{ punto.x }}</td>
+                <td>{{ punto.y }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+ 
+  
+  
+  
+  
