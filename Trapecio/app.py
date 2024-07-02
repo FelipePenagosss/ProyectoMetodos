@@ -1,68 +1,62 @@
 from flask import Flask, request, jsonify
-import numpy as np
+from flask_cors import CORS
+import math
 import matplotlib.pyplot as plt
+import numpy as np
 import io
 import base64
 
 app = Flask(__name__)
+CORS(app)
 
-def fx(x):
-    return np.sqrt(x) * np.sin(x)
-
-def integrar_trapecios(a, b, n):
-    suma = 0
-    muestras = n + 1
+def metodo_trapecio(f, a, b, n):
     h = (b - a) / n
-
-    for i in range(1, n):
-        suma += fx(a + i * h)
-    total = h / 2 * (fx(a) + 2 * suma + fx(b))
-
-    return total, muestras
-
-def generar_grafico(a, b, muestras):
-    xi = np.linspace(a, b, muestras)
-    fi = fx(xi)
-
-    muestraLinea = muestras * 10
-    xk = np.linspace(a, b, muestraLinea)
-    fk = fx(xk)
-
-    plt.figure()
-    plt.plot(xi, fi, 'go')
-    plt.plot(xk, fk)
-    plt.fill_between(xi, 0, fi, color='b')
-    for j in range(muestras):
-        plt.axvline(xi[j], color='w')
-
-    img = io.BytesIO()
-    plt.savefig(img, format='png')
-    img.seek(0)
-    plt.close()
-
-    img_b64 = base64.b64encode(img.getvalue()).decode('utf8')
-    return img_b64
+    x = np.linspace(a, b, n+1)
+    y = f(x)
+    area = (h/2) * np.sum(y[:-1] + y[1:])
+    return area, x, y
 
 @app.route('/Trapecio', methods=['POST'])
-def integrar_trapecios_endpoint():
+def solve_trapecio():
     data = request.json
-    a = data['a']
-    b = data['b']
-    n = data['n']
+    f_str = data['funcion']
+    a = float(data['a'])
+    b = float(data['b'])
+    n = int(data['n'])
 
-    if not (isinstance(a, (int, float)) and isinstance(b, (int, float)) and isinstance(n, int)):
-        return jsonify({'error': 'Por favor, asegúrate de que los valores de a, b sean números y n sea un entero.'}), 400
+    # Definir la función f utilizando eval
+    try:
+        f = lambda x: eval(f_str, {"math": math, "x": x, "__builtins__": {}})
+        f_v = np.vectorize(f)
+    except Exception as e:
+        return jsonify({'error': f'Error en la función: {str(e)}'}), 400
 
-    if a >= b:
-        return jsonify({'error': 'El valor de a debe ser menor que el valor de b.'}), 400
+    try:
+        area,x,y= metodo_trapecio(f_v, a, b, n)
 
-    if n <= 0:
-        return jsonify({'error': 'El número de trapecios n debe ser mayor que 0.'}), 400
+        # Generar la gráfica
+        plt.plot(x, y, 'b', label='f(x)')
+        for i in range(n):
+            plt.fill([x[i], x[i], x[i+1], x[i+1]], [0, y[i], y[i+1], 0], 'r', edgecolor='black', alpha=0.5)
+        plt.grid(True)
+        plt.axhline(0, color="#000000")
+        plt.axvline(0, color="#000000")
+        plt.title("Método del Trapecio")
+        plt.ylabel("Eje Y")
+        plt.xlabel("Eje X")
+        plt.legend()
 
-    resultado, muestras = integrar_trapecios(a, b, n)
-    grafico = generar_grafico(a, b, muestras)
+        img = io.BytesIO()
+        plt.savefig(img, format='png')
+        img.seek(0)
+        plt.close()
 
-    return jsonify({'resultado': resultado, 'grafico': grafico})
+        # Convertir la imagen a base64
+        img_base64 = base64.b64encode(img.getvalue()).decode('utf-8')
+
+        return jsonify({'Area': area, 'Imagen': img_base64})
+    except Exception as e:
+        return jsonify({'error': f'Error durante la ejecución: {str(e)}'}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5006)

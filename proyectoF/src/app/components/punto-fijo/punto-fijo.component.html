@@ -7,19 +7,19 @@
           <div class="mb-3">
             <input type="text" formControlName="funcion" class="form-control form-control-lg" placeholder="Funcion Despeje">
             <div class="text-danger" *ngIf="eventForm.get('funcion')?.hasError('required') && eventForm.get('funcion')?.touched">
-              <span>La funcion despeje<strong>es obligatoria</strong></span>
+              <span>La funcion despeje<strong> es obligatoria</strong></span>
             </div>
           </div>
           <div class="mb-3">
             <input type="text" formControlName="funcionO" class="form-control form-control-lg" placeholder="Funcion Original">
             <div class="text-danger" *ngIf="eventForm.get('funcionO')?.hasError('required') && eventForm.get('funcionO')?.touched">
-              <span>La funcion original <strong>es obligatoria</strong></span>
+              <span>La funcion original <strong> es obligatoria</strong></span>
             </div>
           </div>
           <div class="mb-3">
             <input type="number" formControlName="puntoI" class="form-control form-control-lg" placeholder="Punto Inicial">
             <div class="text-danger" *ngIf="eventForm.get('puntoI')?.hasError('required') && eventForm.get('puntoI')?.touched">
-              <span>El punto de inicio <strong>es obligatorio</strong></span>
+              <span>El punto de inicio <strong> es obligatorio</strong></span>
             </div>
           </div>
           <div class="mb-3">
