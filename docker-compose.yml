@@ -38,3 +38,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5009:5009"
+  euler:
+    build: ./euler
+    ports:
+      - "5008:5008"
