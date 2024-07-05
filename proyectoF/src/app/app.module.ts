@@ -14,6 +14,7 @@ import { GaussSeidelComponent } from './components/gauss-seidel/gauss-seidel.com
 import { JacobiComponent } from './components/jacobi/jacobi.component';
 import { TrapecioComponent } from './components/trapecio/trapecio.component';
 import { SimpsonComponent } from './components/simpson/simpson.component';
+import { EulerComponent } from './components/euler/euler.component';
 
 
 
@@ -29,6 +30,7 @@ import { SimpsonComponent } from './components/simpson/simpson.component';
     JacobiComponent,
     TrapecioComponent,
     SimpsonComponent,
+    EulerComponent,
   
   
   ],

@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-sm-5">
+    <div class="card">
+      <div class="card-body text-center">
+        <span class="titulo">{{ titulo }}</span>
+        <form class="mt-3" [formGroup]="eventForm" (ngSubmit)="consulta()">
+          <div class="mb-3">
+            <input type="text" formControlName="funcion" class="form-control form-control-lg" placeholder="Función">
+            <div class="text-danger" *ngIf="eventForm.get('funcion')?.hasError('required') && eventForm.get('funcion')?.touched">
+              <span>La función es obligatoria</span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <input type="number" formControlName="x_inicial" class="form-control form-control-lg" placeholder="X inicial">
+            <div class="text-danger" *ngIf="eventForm.get('x_inicial')?.hasError('required') && eventForm.get('x_inicial')?.touched">
+              <span>X inicial es obligatorio</span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <input type="number" formControlName="x_secundaria" class="form-control form-control-lg" placeholder="X secundaria">
+            <div class="text-danger" *ngIf="eventForm.get('x_secundaria')?.hasError('required') && eventForm.get('x_secundaria')?.touched">
+              <span>X secundaria es obligatoria</span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <input type="number" formControlName="y_inicial" class="form-control form-control-lg" placeholder="Y inicial">
+            <div class="text-danger" *ngIf="eventForm.get('y_inicial')?.hasError('required') && eventForm.get('y_inicial')?.touched">
+              <span>Y inicial es obligatorio</span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <input type="number" formControlName="numero_iteraciones" class="form-control form-control-lg" placeholder="Número de iteraciones">
+            <div class="text-danger" *ngIf="eventForm.get('numero_iteraciones')?.hasError('required') && eventForm.get('numero_iteraciones')?.touched">
+              <span>Número de iteraciones es obligatorio</span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <button type="button" routerLink="/" class="btn btn-secondary btn-lg float-start">VOLVER</button>
+            <button type="submit" [disabled]="eventForm.invalid" class="btn btn-success btn-lg float-end">ACEPTAR</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-7">
+    <div class="card">
+      <div class="card-body text-center">
+        <span class="titulo">Resultados</span>
+        <br>
+        <span>Resultado de Y evaluada: {{ raiz }}</span>
+        <br>
+        <!-- Aquí puedes agregar la sección de gráfica si lo deseas -->
+        <table *ngIf="lista.length >= 0" class="table table-striped mt-3">
+          <thead>
+          <tr>
+            <th scope="col">Iteración</th>
+            <th scope="col">X</th>
+            <th scope="col">Y</th>
+            <th scope="col">Función Evaluada</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let punto of lista; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ punto.X }}</td>
+            <td>{{ punto.Y }}</td>
+            <td>{{ punto.funcion_f }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
