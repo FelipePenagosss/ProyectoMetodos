@@ -42,3 +42,8 @@ services:
     build: ./euler
     ports:
       - "5008:5008"
+  ajuste_lineal_de_curvas:
+    build: ./ajuste_lineal_de_curvas
+    ports:
+      - "5010:5010"
+  

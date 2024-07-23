@@ -11,7 +11,7 @@ import { trapecioService } from 'src/app/services/trapecioService';
 })
 export class TrapecioComponent implements OnInit {
   eventForm: FormGroup;
-  titulo = 'Metodo Taprecio';
+  titulo = 'Metodo Trapecio';
   lista: any[] = [];
   area: number = 0;
   imagen: string = '';

@@ -15,7 +15,7 @@ import { JacobiComponent } from './components/jacobi/jacobi.component';
 import { TrapecioComponent } from './components/trapecio/trapecio.component';
 import { SimpsonComponent } from './components/simpson/simpson.component';
 import { EulerComponent } from './components/euler/euler.component';
-
+import { ajusteComponent } from './components/ajuste_lineal_de_curvas/ajuste.component';
 
 
 
@@ -31,7 +31,7 @@ import { EulerComponent } from './components/euler/euler.component';
     TrapecioComponent,
     SimpsonComponent,
     EulerComponent,
-  
+    ajusteComponent
   
   ],
   imports: [
