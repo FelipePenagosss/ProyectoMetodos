@@ -50,3 +50,16 @@ plt.xlabel("Eje X")
 if (x!= np.nan):
     plt.axvline(x)#Línea vertical donde cruzan la función idéntica y el g(x)
 plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
