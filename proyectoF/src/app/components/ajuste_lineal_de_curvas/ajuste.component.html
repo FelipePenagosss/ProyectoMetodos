@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-sm-5">
+      <div class="card">
+          <div class="card-body text-center">
+              <span class="titulo">{{titulo}}</span>
+              <form class="mt-3" [formGroup]="eventForm" (ngSubmit)="consulta()">
+                  <div class="mb-3">
+                      <input type="text" formControlName="PuntosX" class="form-control form-control-lg" placeholder="Puntos X (separados por comas)">
+                      <div class="text-danger" *ngIf="eventForm.get('PuntosX')?.hasError('required') && eventForm.get('PuntosX')?.touched">
+                          <span>Los puntos X <strong>son obligatorios</strong></span>
+                      </div>
+                  </div>
+                  <div class="mb-3">
+                      <input type="text" formControlName="PuntosY" class="form-control form-control-lg" placeholder="Puntos Y (separados por comas)">
+                      <div class="text-danger" *ngIf="eventForm.get('PuntosY')?.hasError('required') && eventForm.get('PuntosY')?.touched">
+                          <span>Los puntos Y <strong>son obligatorios</strong></span>
+                      </div>
+                  </div>
+                  <div class="mb-3">
+                      <button type="button" routerLink="/**" class="btn btn-secondary btn-lg float-start">VOLVER</button>
+                      <button type="submit" class="btn btn-success btn-lg float-end">ACEPTAR</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+  <div class="col-sm-7">
+      <div class="card">
+          <div class="card-body text-center">
+              <span class="titulo">Resultados</span>
+              <br>
+              <span>Raiz Encontrada: {{raiz}}</span>
+              <br>
+              <span class="titulo">Gráfica</span>
+              <br>
+              <img *ngIf="imagen" [src]="imagen" alt="Gráfica">
+              <table *ngIf="lista.length >= 0" class="table table-striped mt-3">
+                  <thead>
+                      <tr>
+                          <th scope="col">Iteración</th>
+                          <th scope="col">X</th>
+                          <th scope="col">Y</th>
+                          <th scope="col">Ajuste</th>
+                          <th scope="col">Error</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let punto of lista">
+                          <td>{{ punto.iteracion }}</td>
+                          <td>{{ punto.x }}</td>
+                          <td>{{ punto.y }}</td>
+                          <td>{{ punto.ajuste }}</td>
+                          <td>{{ punto.error }}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
