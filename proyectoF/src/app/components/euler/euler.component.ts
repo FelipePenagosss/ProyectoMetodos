@@ -10,7 +10,7 @@ import { Euler } from 'src/app/models/Euler';
 })
 export class EulerComponent  implements OnInit{
   eventForm: FormGroup;
-  titulo = 'Metodo Euler';
+  titulo = 'Método Euler';
   lista: any[] = [];
   raiz: number = 0;
   constructor(

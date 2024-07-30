@@ -3,15 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import io
 import base64
-<<<<<<< HEAD
 from flask_cors import CORS
-
 app = Flask(__name__)
 CORS(app)
-=======
-
-app = Flask(__name__)
->>>>>>> 942df49d0de2e094a6f49d296755f20a53e10b72
 
 def ajuste_lineal(x, y):
     n = len(x)
@@ -33,21 +27,16 @@ def ajuste_lineal(x, y):
 @app.route('/ajuste_lineal_de_curvas', methods=['POST'])
 def solve_ajuste_lineal():
     data = request.json
-<<<<<<< HEAD
-    # Verifica que las claves existen en el JSON recibido
+    
     if 'PuntosX' not in data or 'PuntosY' not in data:
         return jsonify({'error': 'Llave faltante en el JSON: "PuntosX" o "PuntosY"'}), 400
     
-    # Asegúrate de que las claves tienen datos válidos
+    
     try:
         x = np.array(data['PuntosX'])
         y = np.array(data['PuntosY'])
     except Exception as e:
         return jsonify({'error': f'Error en los datos recibidos: {str(e)}'}), 400
-=======
-    x = np.array(data['x'])
-    y = np.array(data['y'])
->>>>>>> 942df49d0de2e094a6f49d296755f20a53e10b72
 
     try:
         m, b, ajuste, iteraciones = ajuste_lineal(x, y)
@@ -75,9 +64,5 @@ def solve_ajuste_lineal():
     except Exception as e:
         return jsonify({'error': f'Error durante la ejecución: {str(e)}'}), 500
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 942df49d0de2e094a6f49d296755f20a53e10b72
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5010)

@@ -5,27 +5,39 @@
           <span class="titulo">{{titulo}}</span>
           <form class="mt-3" [formGroup]="eventForm" (ngSubmit)="consulta()">
             <div class="mb-3">
-              <input type="text" formControlName="funcion" class="form-control form-control-lg" placeholder="Funcion">
+              <label class="block mb-2 text-sm font-bold text-gray-700" for="description">
+                Función
+              </label>
+              <input type="text" formControlName="funcion" class="form-control form-control-lg" placeholder="Función">
               <div class="text-danger" *ngIf="eventForm.get('funcion')?.hasError('required') && eventForm.get('funcion')?.touched">
-                <span>La funcion despeje<strong> es obligatoria</strong></span>
+                <span>La función <strong> es obligatoria</strong></span>
               </div>
             </div>
             <div class="mb-3">
-              <input type="text" formControlName="a" class="form-control form-control-lg" placeholder="a">
+              <label class="block mb-2 text-sm font-bold text-gray-700" for="description">
+                Límite inferior
+              </label>
+              <input type="text" formControlName="a" class="form-control form-control-lg" placeholder="Límite inferior">
               <div class="text-danger" *ngIf="eventForm.get('a')?.hasError('required') && eventForm.get('a')?.touched">
-                <span>La funcion original <strong> es obligatoria</strong></span>
+                <span>El límite inferior <strong>es obligatorio</strong></span>
               </div>
             </div>
             <div class="mb-3">
-              <input type="number" formControlName="b" class="form-control form-control-lg" placeholder="b">
+              <label class="block mb-2 text-sm font-bold text-gray-700" for="description">
+                Límite superior
+              </label>
+              <input type="number" formControlName="b" class="form-control form-control-lg" placeholder="Límite Superior">
               <div class="text-danger" *ngIf="eventForm.get('b')?.hasError('required') && eventForm.get('b')?.touched">
-                <span>El punto de inicio <strong> es obligatorio</strong></span>
+                <span>El límite superior<strong> es obligatorio</strong></span>
               </div>
             </div>
             <div class="mb-3">
-              <input type="number" formControlName="n" class="form-control form-control-lg" placeholder="n">
+              <label class="block mb-2 text-sm font-bold text-gray-700" for="description">
+                Número de trapécios
+              </label>
+              <input type="number" formControlName="n" class="form-control form-control-lg" placeholder="Número de trapécios">
               <div class="text-danger" *ngIf="eventForm.get('n')?.hasError('required') && eventForm.get('n')?.touched">
-                <span>El numero <strong> es obligatorio</strong></span>
+                <span>El número de trapécios <strong> es obligatorio</strong></span>
               </div>
             </div>
             <div class="mb-3">
@@ -41,7 +53,7 @@
         <div class="card-body text-center">
           <span class="titulo">Resultados</span>
           <br>
-          <span>Raiz Encontrada: {{area}}</span>
+          <span>Área Encontrada: {{area}}</span>
           <br>
           <span class="titulo">Gráfica</span>
            <br>

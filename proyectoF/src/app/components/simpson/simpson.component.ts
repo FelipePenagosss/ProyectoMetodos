@@ -10,7 +10,7 @@ import {SimpsonService} from 'src/app/services/simpsonService';
 })
 export class SimpsonComponent implements OnInit{
   eventForm: FormGroup;
-  titulo = 'Metodo de Simpson';
+  titulo = 'Método de Simpson';
   lista: any[] = [];
   raiz: number = 0;
   imagen: string = '';

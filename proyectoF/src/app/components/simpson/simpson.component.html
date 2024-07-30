@@ -5,24 +5,36 @@
           <span class="titulo">{{titulo}}</span>
           <form class="mt-3" [formGroup]="eventForm" (ngSubmit)="consulta()">
             <div class="mb-3">
-              <input type="text" formControlName="funcion" class="form-control form-control-lg" placeholder="Funcion">
+              <label class="block mb-2 text-sm font-bold text-gray-700" for="description">
+               Función
+              </label>
+              <input type="text" formControlName="funcion" class="form-control form-control-lg" placeholder="Función">
               <div class="text-danger" *ngIf="eventForm.get('funcion')?.hasError('required') && eventForm.get('funcion')?.touched">
-                <span>La funcion <strong>es obligatoria</strong></span>
+                <span>La función <strong>es obligatoria</strong></span>
               </div>
             </div>
             <div class="mb-3">
-              <input type="number" formControlName="limitea" class="form-control form-control-lg" placeholder="Limite a ">
+              <label class="block mb-2 text-sm font-bold text-gray-700" for="description">
+                Límite a - Límite inferior
+              </label>
+              <input type="number" formControlName="limitea" class="form-control form-control-lg" placeholder="Límite a ">
               <div class="text-danger" *ngIf="eventForm.get('limitea')?.hasError('required') && eventForm.get('limitea')?.touched">
-                <span>El limite a de la funcion <strong>es obligatorio</strong></span>
+                <span>El límite a de la función <strong>es obligatorio</strong></span>
               </div>
             </div>
             <div class="mb-3">
+              <label class="block mb-2 text-sm font-bold text-gray-700" for="description">
+                Límite b - Límite superior
+              </label>
               <input type="number" formControlName="limiteb" class="form-control form-control-lg" placeholder="Limite b">
               <div class="text-danger" *ngIf="eventForm.get('limiteb')?.hasError('required') && eventForm.get('limiteb')?.touched">
-                <span>El limite b de la funcion <strong>es obligatorio</strong></span>
+                <span>El límite b de la función <strong>es obligatorio</strong></span>
               </div>
             </div>
             <div class="mb-3">
+              <label class="block mb-2 text-sm font-bold text-gray-700" for="description">
+                Número de imágenes
+              </label>
               <input type="number" formControlName="nimagenes" class="form-control form-control-lg" placeholder="Número de imágenes">
               <div class="text-danger" *ngIf="eventForm.get('nimagenes')?.hasError('required') && eventForm.get('nimagenes')?.touched">
                 <span>El número de imágenes es obligatorio</span>
@@ -46,7 +58,7 @@
         <div class="card-body text-center">
           <span class="titulo">Resultados</span>
           <br>
-          <span>Raiz Encontrada: {{raiz}}</span>
+          <span>Área Encontrada: {{raiz}}</span>
           <br>
           <span class="titulo">Gráfica</span>
            <br>
@@ -56,7 +68,7 @@
             <thead>
               <tr>
                 <th scope="col">Punto evaluado</th>
-                <th scope="col">Imagen</th>
+                <th scope="col">Imágen</th>
               </tr>
             </thead>
             <tbody>

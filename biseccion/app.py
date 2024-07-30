@@ -1,6 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+import matplotlib.pyplot as plt
+import numpy as np
+import io
+import base64
 
 app = Flask(__name__)
+CORS(app)
 
 def biseccion(f, a, b, error=1e-6):
     maxima_Iteracion = 100
@@ -10,11 +16,11 @@ def biseccion(f, a, b, error=1e-6):
         c = (a + b) / 2
         iteraciones.append({
             'iteracion': i + 1,
-            'a': a,
-            'b': b,
-            'c': c,
-            'f(c)': f(c),
-            'error': abs(f(c)),
+            'a': round(a,4),
+            'b': round(b,4),
+            'c': round(c,4),
+            'fc': round(f(c),4),
+            'error': round(abs(f(c)),4),
         })
         if abs(f(c)) < error or (b - a) / 2 < error:
             return c, iteraciones
@@ -23,6 +29,32 @@ def biseccion(f, a, b, error=1e-6):
         else:
             a = c
     raise ValueError("Error")
+
+def generar_grafica(f, a, b, raiz):
+    fig, ax = plt.subplots()
+    x = np.linspace(a - 1, b + 1, 400)
+    y = f(x)
+    
+    ax.plot(x, y, label='f(x)')
+    ax.axhline(0, color='red', lw=0.5)
+    ax.axvline(0, color='red', lw=0.5)
+    ax.plot(raiz, 0, 'ro')
+    ax.axvline(raiz, color='green', linestyle='--', lw=0.5)
+    
+    ax.set_title("Método de Bisección")
+    ax.set_xlabel("Eje X")
+    ax.set_ylabel("Eje Y")
+    ax.legend()
+    ax.grid(True)
+    
+    # Convertir gráfica a base64
+    buffer = io.BytesIO()
+    fig.savefig(buffer, format='png')
+    buffer.seek(0)
+    imagen = base64.b64encode(buffer.read()).decode('utf-8')
+    plt.close(fig)
+    
+    return imagen
 
 @app.route('/biseccion', methods=['POST'])
 def solve_biseccion():
@@ -35,7 +67,8 @@ def solve_biseccion():
     
     try:
         root, iteraciones = biseccion(f, a, b)
-        return jsonify({'Raiz': root, 'Iteraciones': iteraciones})
+        imagen = generar_grafica(f, a, b, root)
+        return jsonify({'Raiz': root, 'Iteraciones': iteraciones, 'Imagen': imagen})
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
 

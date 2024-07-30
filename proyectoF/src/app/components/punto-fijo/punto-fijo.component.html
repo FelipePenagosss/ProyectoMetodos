@@ -5,18 +5,27 @@
         <span class="titulo">{{titulo}}</span>
         <form class="mt-3" [formGroup]="eventForm" (ngSubmit)="consulta()">
           <div class="mb-3">
-            <input type="text" formControlName="funcion" class="form-control form-control-lg" placeholder="Funcion Despeje">
+            <label class="block mb-2 text-sm font-bold text-gray-700" for="description">
+              Función despeje
+            </label>
+            <input type="text" formControlName="funcion" class="form-control form-control-lg" placeholder="Función Despeje">
             <div class="text-danger" *ngIf="eventForm.get('funcion')?.hasError('required') && eventForm.get('funcion')?.touched">
-              <span>La funcion despeje<strong> es obligatoria</strong></span>
+              <span>La función despeje<strong> es obligatoria</strong></span>
             </div>
           </div>
           <div class="mb-3">
-            <input type="text" formControlName="funcionO" class="form-control form-control-lg" placeholder="Funcion Original">
+            <label class="block mb-2 text-sm font-bold text-gray-700" for="description">
+              Función original
+            </label>
+            <input type="text" formControlName="funcionO" class="form-control form-control-lg" placeholder="Función Original">
             <div class="text-danger" *ngIf="eventForm.get('funcionO')?.hasError('required') && eventForm.get('funcionO')?.touched">
-              <span>La funcion original <strong> es obligatoria</strong></span>
+              <span>La función original <strong> es obligatoria</strong></span>
             </div>
           </div>
           <div class="mb-3">
+            <label class="block mb-2 text-sm font-bold text-gray-700" for="description">
+              Punto de inicio
+            </label>
             <input type="number" formControlName="puntoI" class="form-control form-control-lg" placeholder="Punto Inicial">
             <div class="text-danger" *ngIf="eventForm.get('puntoI')?.hasError('required') && eventForm.get('puntoI')?.touched">
               <span>El punto de inicio <strong> es obligatorio</strong></span>
@@ -35,7 +44,7 @@
       <div class="card-body text-center">
         <span class="titulo">Resultados</span>
         <br>
-        <span>Raiz Encontrada: {{raiz}}</span>
+        <span>Raíz Encontrada: {{raiz}}</span>
         <br>
         <span class="titulo">Gráfica</span>
          <br>
@@ -43,7 +52,7 @@
         <table *ngIf="lista.length >= 0" class="table table-striped mt-3">
           <thead>
             <tr>
-              <th scope="col">Iteracion</th>
+              <th scope="col">Iteración</th>
               <th scope="col">Xi</th>
               <th scope="col">Error</th>
             </tr>
@@ -61,17 +70,7 @@
   </div>
 </div>
 <br>
-<!--
-<div class="col-sm-6">
-  <div class="card">
-    <div class="card-body text-center">
-      <span class="titulo">Gráfica</span>
-      <br>
-      <img *ngIf="imagen" [src]="imagen" alt="Gráfica">
-    </div>
-  </div>
-</div>
--->
+
 
 
 

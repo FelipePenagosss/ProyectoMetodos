@@ -1,5 +1,5 @@
-# Usa una imagen base de Node.js específica (versión Alpine)
-FROM node:20.9.0-alpine as build
+# Usa una imagen base de Node.js específica (versión 18.x.x LTS Alpine)
+FROM node:18-alpine as build
 
 # Establece el directorio de trabajo en el contenedor
 WORKDIR /usr/src/app
@@ -9,6 +9,9 @@ COPY package*.json ./
 
 # Instala las dependencias del proyecto
 RUN npm install
+
+# Instala @angular/cli globalmente
+RUN npm install -g @angular/cli
 
 # Copia todos los archivos del proyecto al directorio de trabajo en el contenedor
 COPY . .

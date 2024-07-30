@@ -10,7 +10,7 @@ import { PuntoFService } from 'src/app/services/puntoFService';
 })
 export class PuntoFijoComponent implements OnInit {
   eventForm: FormGroup;
-  titulo = 'Metodo Punto Fijo';
+  titulo = 'Método Gauss Seidel';
   lista: any[] = [];
   raiz: number = 0;
   imagen: string = '';

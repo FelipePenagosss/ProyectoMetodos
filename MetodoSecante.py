@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import matplotlib.pyplot as plt
 import numpy as np
 from tabulate import tabulate
@@ -75,7 +75,6 @@ plt.plot(float(xi), 0, 'ro')
 if not np.isnan(float(xnuevo)):
     plt.axvline(float(xnuevo))  # Línea vertical donde cruzan la función idéntica y el g(x)
 plt.show()
-=======
 import matplotlib.pyplot as plt
 import numpy as np
 import sympy as sp
@@ -134,9 +133,4 @@ plt.plot(xi,0, 'ro')
 if (xnuevo!= np.nan):
     plt.axvline(xi)#Línea vertical donde cruzan la función idéntica y el g(x)
 plt.show()
-<<<<<<< HEAD
 
-secante
-=======
->>>>>>> origin/main
->>>>>>> Rama-Dilan
