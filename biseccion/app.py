@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import io
 import base64
+import math  
 
 app = Flask(__name__)
 CORS(app)
@@ -33,7 +34,7 @@ def biseccion(f, a, b, error=1e-6):
 def generar_grafica(f, a, b, raiz):
     fig, ax = plt.subplots()
     x = np.linspace(a - 1, b + 1, 400)
-    y = f(x)
+    y = np.array([f(val) for val in x])
     
     ax.plot(x, y, label='f(x)')
     ax.axhline(0, color='red', lw=0.5)
@@ -47,7 +48,6 @@ def generar_grafica(f, a, b, raiz):
     ax.legend()
     ax.grid(True)
     
-    # Convertir gráfica a base64
     buffer = io.BytesIO()
     fig.savefig(buffer, format='png')
     buffer.seek(0)
@@ -63,8 +63,9 @@ def solve_biseccion():
     a = data['x0']
     b = data['x1']
     
-    f = lambda x: eval(f_str)
-    
+    def f(x):
+        return eval(f_str, {"math": math, "x": x})
+
     try:
         root, iteraciones = biseccion(f, a, b)
         imagen = generar_grafica(f, a, b, root)

@@ -35,7 +35,9 @@ export class PuntoFijoComponent implements OnInit {
       funcion_original: this.eventForm.get('funcionO')?.value,
       punto_inicial: this.eventForm.get('puntoI')?.value
     };
-
+      alert(puntoF.funcion);
+      alert(puntoF.funcion_original);
+      alert(puntoF.punto_inicial);
     this.puntoService.save(puntoF).subscribe(
       response => {
         console.log(response);
