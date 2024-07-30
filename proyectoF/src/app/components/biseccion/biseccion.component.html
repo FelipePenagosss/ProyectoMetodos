@@ -8,7 +8,11 @@
                 <label class="block mb-2 text-sm font-bold text-gray-700" for="description">
                     Función
                   </label>
-              <input type="text" formControlName="funcion" class="form-control form-control-lg" placeholder="Función">
+              <div class="input-group">
+                <input type="text" formControlName="funcion" class="form-control form-control-lg" placeholder="Función" readonly>
+                <button type="button" class="btn btn-secondary" (click)="openCalculator('funcion')">🧮</button>
+              </div>
+              
               <div class="text-danger" *ngIf="eventForm.get('funcion')?.hasError('required') && eventForm.get('funcion')?.touched">
                 <span>La función <strong> es obligatoria</strong></span>
               </div>
@@ -76,6 +80,27 @@
     </div>
   </div>
   <br>
+
+  <!-- Modal para la calculadora -->
+<div class="modal" tabindex="-1" role="dialog" id="calculatorModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Calculadora</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeCalculator()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-calculator (close)="closeCalculator()" (save)="saveFunction($event)"></app-calculator>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeCalculator()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   
   

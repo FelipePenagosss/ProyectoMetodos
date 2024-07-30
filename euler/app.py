@@ -1,18 +1,18 @@
 from flask import Flask, request, jsonify
-import numpy as np
+import math
 from flask_cors import CORS
-
 
 app = Flask(__name__)
 CORS(app)
+
 class Funcion:
     def __init__(self, funcion):
-        self.funcion = lambda x, y: eval(funcion, {'x': x, 'y': y, 'np': np})
+        self.funcion = lambda x, y: eval(funcion, {'x': x, 'y': y, 'math': math})
 
 def euler(funcion, x0, x1, y, n):
     h = (x1 - x0) / n
-    X = np.zeros(n + 1)
-    Y = np.zeros(n + 1)
+    X = [0] * (n + 1)
+    Y = [0] * (n + 1)
     X[0] = x0
     Y[0] = y
 
@@ -32,7 +32,7 @@ def euler(funcion, x0, x1, y, n):
 
     resultado = Y[n]
 
-    return X.tolist(), Y.tolist(), resultado, iteraciones
+    return X, Y, resultado, iteraciones
 
 @app.route('/euler', methods=['POST'])
 def resolver_euler():

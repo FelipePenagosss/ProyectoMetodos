@@ -17,7 +17,7 @@ import { TrapecioComponent } from './components/trapecio/trapecio.component';
 import { SimpsonComponent } from './components/simpson/simpson.component';
 import { EulerComponent } from './components/euler/euler.component';
 import { ajusteComponent } from './components/ajuste_lineal_de_curvas/ajuste.component';
-
+import { CalculatorComponent } from './components/calculator/calculator.component';
 
 
 @NgModule({
@@ -32,7 +32,8 @@ import { ajusteComponent } from './components/ajuste_lineal_de_curvas/ajuste.com
     TrapecioComponent,
     SimpsonComponent,
     EulerComponent,
-    ajusteComponent
+    ajusteComponent,
+    CalculatorComponent
   
   ],
   imports: [

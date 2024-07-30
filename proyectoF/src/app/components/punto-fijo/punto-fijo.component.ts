@@ -10,10 +10,11 @@ import { PuntoFService } from 'src/app/services/puntoFService';
 })
 export class PuntoFijoComponent implements OnInit {
   eventForm: FormGroup;
-  titulo = 'Método Gauss Seidel';
+  titulo = 'Metodo Punto Fijo';
   lista: any[] = [];
   raiz: number = 0;
   imagen: string = '';
+  selectedField: string = ''; // Campo seleccionado para actualizar
 
   constructor(
     private fb: FormBuilder,
@@ -21,7 +22,7 @@ export class PuntoFijoComponent implements OnInit {
   ) {
     this.eventForm = this.fb.group({
       funcion: ['', Validators.required],
-      funcionO:['',Validators.required],
+      funcionO: ['', Validators.required],
       puntoI: ['', Validators.required],
     });
   }
@@ -31,7 +32,7 @@ export class PuntoFijoComponent implements OnInit {
   consulta() {
     const puntoF: PuntoF = {
       funcion: this.eventForm.get('funcion')?.value,
-      funcion_original:this.eventForm.get('funcionO')?.value,
+      funcion_original: this.eventForm.get('funcionO')?.value,
       punto_inicial: this.eventForm.get('puntoI')?.value
     };
 
@@ -55,5 +56,27 @@ export class PuntoFijoComponent implements OnInit {
         this.eventForm.reset();
       }
     );
+  }
+
+  openCalculator(field: string) {
+    this.selectedField = field; // Guarda el campo seleccionado
+    const calculatorModal = document.getElementById('calculatorModal');
+    if (calculatorModal) {
+      calculatorModal.style.display = 'block';
+    }
+  }
+
+  closeCalculator() {
+    const calculatorModal = document.getElementById('calculatorModal');
+    if (calculatorModal) {
+      calculatorModal.style.display = 'none';
+    }
+  }
+
+  saveFunction(func: string) {
+    if (this.selectedField) {
+      this.eventForm.get(this.selectedField)?.setValue(func);
+      this.closeCalculator();
+    }
   }
 }

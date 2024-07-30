@@ -10,6 +10,7 @@ import { SimpsonComponent } from './components/simpson/simpson.component';
 import { TrapecioComponent } from './components/trapecio/trapecio.component';
 import {EulerComponent} from "./components/euler/euler.component";
 import {ajusteComponent} from "./components/ajuste_lineal_de_curvas/ajuste.component";
+import {CalculatorComponent} from "./components/calculator/calculator.component";
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'Trapecio', component:TrapecioComponent },
   { path: 'Euler', component:EulerComponent },
   { path: 'Ajuste', component:ajusteComponent },
+  { path: 'calculator', component:CalculatorComponent },
 
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

@@ -14,6 +14,7 @@ export class NewtonRaphsonComponent implements OnInit {
   lista: any = [];
   raiz: number = 0;
   imagen: string = '';
+  selectedField: string = ''; // Campo seleccionado para actualizar
   constructor(
     private fb: FormBuilder,
     private newtonRaphsonService: NewtonRaphsonService
@@ -54,4 +55,27 @@ export class NewtonRaphsonComponent implements OnInit {
     );
 
   }
+
+  openCalculator(field: string) {
+    this.selectedField = field; // Guarda el campo seleccionado
+    const calculatorModal = document.getElementById('calculatorModal');
+    if (calculatorModal) {
+      calculatorModal.style.display = 'block';
+    }
+  }
+
+  closeCalculator() {
+    const calculatorModal = document.getElementById('calculatorModal');
+    if (calculatorModal) {
+      calculatorModal.style.display = 'none';
+    }
+  }
+
+  saveFunction(func: string) {
+    if (this.selectedField) {
+      this.eventForm.get(this.selectedField)?.setValue(func);
+      this.closeCalculator();
+    }
+  }
+
 }
